@@ -1,0 +1,164 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+    <style>
+@media screen and (min-width:700px) {
+  .schedule {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-rows:
+      [tracks] auto
+%template_rows%
+
+    grid-template-columns:
+%template_columns%
+
+  }
+}
+
+.time-slot {
+  grid-column: times;
+}
+
+.track-slot {
+  display: none; /* hidden on small screens and browsers without grid support */
+}
+
+@supports( display:grid ) {
+  @media screen and (min-width:700px) {
+    .track-slot {
+      display: block;
+      padding: 10px 5px 5px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255,255,255,.9);
+    }
+  }
+}
+
+/* Small-screen & fallback styles */
+.session {
+  margin-bottom:  1em;
+}
+
+@supports( display:grid ) {
+  @media screen and (min-width: 700px) {
+    .session {
+      margin: 0;
+    } 
+  }
+}
+
+
+body {
+  padding: 0px;
+  max-width: 1100px;
+  margin: 0 auto;
+  line-height: 1.5;
+  
+  background-image: url('images/background.png'); /* Path to your image */
+  background-repeat: repeat-y; /* Repeats the image vertically */
+  background-size: 100% auto; /* Stretches the image to the full width of the page */
+  background-attachment: fixed; /* Keeps the background fixed during scroll */
+}
+
+.session {
+  padding: .5em;
+  border-radius: 2px;
+  font-size: 14px;
+  box-shadow:
+    rgba(255,255,255,.6) 1px 1px 0,
+    rgba(0,0,0,.3) 4px 4px 0;
+}
+
+.session-title,
+.session-time,
+.session-track,
+.session-presenter {
+  display: block;
+}
+
+.session-title,
+.time-slot {
+  margin: 0;
+  font-size: 1em;
+}
+
+.session-title a {
+  color: #fff;
+  text-decoration-style: dotted;
+  
+  &:hover {
+    font-style: italic;
+  }
+  
+  &:focus {
+    outline: 2px dotted rgba(255,255,255,.8);
+  }
+}
+
+.track-slot,
+.time-slot {
+  font-weight: bold;
+  font-size:.75em;
+}
+
+%trackstyle%
+
+.track-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ccc;
+  color: #000;
+  box-shadow: none;
+}
+
+.text {
+  max-width: 750px;
+  font-size: 18px;
+  margin: 0 auto 50px;
+}
+
+.meta {
+  color: #555;
+  font-style: italic;
+}
+
+.meta a {
+  color: #555;
+}
+
+hr {
+  margin: 40px 0;
+}
+.fill {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+.container img {
+  width: 100%;
+}
+
+	</style>
+</head>
+<body>
+<div class="container">
+  <img src="images/banner.png"/>
+</div>
+
+<div class="schedule" aria-labelledby="schedule-heading">
+%track_slot_header%
+%time_slot_header%
+%sessions%
+   
+</div>
+
+</body>
+</html>
